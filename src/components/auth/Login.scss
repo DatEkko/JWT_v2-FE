@@ -1,0 +1,100 @@
+.login-container {
+    background     : url("../../assets/background-login.jpg");
+    background-size: cover;
+    height         : 100vh;
+    color          : white;
+    font-family    : "Lexend", sans-serif;
+
+    .container {
+        .row {
+            .content-left {
+                display        : flex;
+                flex-direction : column;
+                justify-content: center;
+
+                .brand {
+                    display        : flex;
+                    justify-content: center;
+                    font-size      : 6.5em;
+                    font-weight    : 400;
+                    font-family    : "Black Ops One", serif;
+                }
+
+                .description {
+                    margin-top     : -25px;
+                    display        : flex;
+                    justify-content: center;
+                    font-size      : 1.5em;
+                    font-weight    : 600;
+                }
+            }
+
+            .content-right {
+                padding    : 10px;
+                height     : 100vh;
+                display    : flex;
+                align-items: center;
+
+                .login-form {
+                    width          : 100%;
+                    border         : 5px solid white;
+                    padding        : 40px;
+                    border-radius  : 10px 50px;
+                    backdrop-filter: blur(5px);
+                    box-shadow     : 0 5px 20px rgba(224, 217, 217, 0.4);
+
+                    input {
+                        height          : 50px;
+                        background-color: transparent;
+                        outline         : none;
+                        box-shadow      : none;
+                        border          : 3px solid white;
+                        border-top      : none;
+                        border-left     : none;
+                        border-right    : none;
+                        color           : white;
+                    }
+
+                    .title {
+                        font-size     : 2.5em;
+                        font-weight   : 600;
+                        padding-top   : 10px;
+                        padding-bottom: 40px;
+                        text-align    : center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .login-container {
+        .container {
+            .row {
+                .content-left {
+                    .brand {
+                        display  : block;
+                        font-size: 3.8em;
+                    }
+
+                    .description {
+                        margin-top: -15px;
+                        display   : block;
+                        font-size : 1em;
+                    }
+                }
+
+                .content-right {
+                    .login-form {
+                        .title {
+                            font-size: 2em;
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+}
