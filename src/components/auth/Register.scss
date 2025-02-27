@@ -1,11 +1,9 @@
-.login-container {
-    background           : url("../../assets/background-login.jpg") no-repeat center center;
-    background-size      : cover;
-    background-attachment: scroll;
-    min-height           : 100vh;
-    overflow             : auto;
-    color                : white;
-    font-family          : "Lexend", sans-serif;
+.register-container {
+    background     : url("../../assets/background-login.jpg") no-repeat center center;
+    background-size: cover;
+    min-height     : 100vh;
+    color          : white;
+    font-family    : "Lexend", sans-serif;
 
     .container {
         .row {
@@ -35,8 +33,10 @@
                 padding    : 10px;
                 display    : flex;
                 align-items: center;
+                height     : 100vh;
 
                 .login-form {
+                    width          : 100%;
                     border         : 5px solid white;
                     padding        : 20px 40px;
                     border-radius  : 10px 50px;
@@ -68,7 +68,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-    .login-container {
+    .register-container {
         .container {
             .row {
                 .content-left {
