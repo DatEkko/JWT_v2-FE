@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './Register.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { registerService } from '../../service/apiService';
 
@@ -17,13 +17,7 @@ const Register = () => {
         isValidEmail: true,
         isValidConfirmPassword: true,
     }
-    const setDefaultState = () => {
-        setEmail('');
-        setPhone('');
-        setUsername('');
-        setPassword('');
-        setConfirmPassword('');
-    }
+
     const [objectCheckInput, setObjCheckInput] = useState(defaultValidInput);
 
     const history = useHistory();
@@ -97,12 +91,15 @@ const Register = () => {
 
             if (res && res.EC === 0) {
                 toast.success("Đăng ký thành công");
-                setDefaultState();
+                handleMoveToLogin()
 
-            } else {
+            } else if (res && res.EC === -4) {
                 toast.error(res.EM)
+                setObjCheckInput({ ...defaultValidInput, isValidPhone: false })
+            } else if (res && res.EC === -3) {
+                toast.error(res.EM)
+                setObjCheckInput({ ...defaultValidInput, isValidEmail: false })
             }
-
         }
     }
 
