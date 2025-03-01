@@ -12,6 +12,11 @@ const loginService = (valueLogin, password) => {
     })
 }
 
+const fetchAllUsers = (page, limit) => {
+    return axios.get(`/api/v1/users/read?page=${page}&limit=${limit}`)
+}
+
 export {
-    registerService, loginService
+    registerService, loginService,
+    fetchAllUsers
 }

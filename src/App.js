@@ -1,17 +1,13 @@
 import './App.scss';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
 import Nav from './components/navigation/Nav';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
 } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UsersPage from './components/user/Users';
 import { useEffect, useState } from 'react';
 import _ from "lodash";
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   const [account, setAccount] = useState({});
@@ -23,28 +19,16 @@ function App() {
   }, [])
 
   return (
-    <Router>
-      <div className="App">
-        {account && !_.isEmpty(account) && account.isAuthenticated &&
+    <>
+      <Router>
+        <div className="app-header">
           <Nav />
-        }
-        <Switch>
-          <Route path="/news">News</Route>
-          <Route path="/about">About</Route>
-          <Route path="/contact">Contact</Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/users">
-            <UsersPage />
-          </Route>
-          <Route path="/" exact>Home</Route>
-          <Route path="*">404 Not Found</Route>
-        </Switch>
-      </div>
+        </div>
+
+        <div className="App-container">
+          <AppRoutes />
+        </div>
+      </Router>
 
       <ToastContainer
         position="bottom-center"
@@ -58,7 +42,8 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-    </Router>
+    </>
+
 
   );
 }
