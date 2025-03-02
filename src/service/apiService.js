@@ -20,7 +20,20 @@ const deleteUser = (user) => {
     return axios.delete(`/api/v1/users/delete`, { data: { id: user.id } })
 }
 
+const fetchGroup = () => {
+    return axios.get(`/api/v1/group/read`)
+}
+
+const createUserService = (userData) => {
+    return axios.post("/api/v1/users/create", { ...userData })
+}
+
+const updateUserService = (userData) => {
+    return axios.put("/api/v1/users/update", { ...userData })
+}
+
 export {
     registerService, loginService,
-    fetchAllUsers, deleteUser
+    fetchAllUsers, deleteUser, fetchGroup,
+    createUserService, updateUserService
 }

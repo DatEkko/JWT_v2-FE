@@ -3,6 +3,7 @@ import './Users.scss';
 import { fetchAllUsers } from '../../service/apiService';
 import ReactPaginate from 'react-paginate';
 import ConfirmDeleteUserModal from '../modals/ConfirmDeleteUserModal';
+import UserModal from '../modals/UserModal';
 
 
 const UsersPage = () => {
@@ -11,7 +12,11 @@ const UsersPage = () => {
     const [currentLimit, setCurrentLimit] = useState(5);
     const [totalPage, setTolalPages] = useState(0);
     const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
-    const [dataDelete, setDataDelete] = useState({})
+    const [dataDelete, setDataDelete] = useState({});
+    const [dataEdit, setDataEdit] = useState({});
+    const [titleModal, setTitleModal] = useState('');
+    const [isOpenUserModal, setIsOpenUserModal] = useState(false);
+    const [actionModalUser, setActionModalUser] = useState('CREATE');
 
     useEffect(() => {
         fetchUsers();
@@ -29,19 +34,49 @@ const UsersPage = () => {
         setCurrentPage(+event.selected + 1);
     }
 
-    const handleDeleteUser = async (user) => {
+    const handleDeleteUser = (user) => {
         setIsShowDeleteModal(true);
         setDataDelete(user);
+    }
+
+    const handleEditUser = (user) => {
+        setTitleModal("Edit An User");
+        setIsOpenUserModal(true);
+        setDataEdit(user);
+        setActionModalUser("EDIT");
+    }
+
+    const handleCreateUser = () => {
+        setTitleModal("Create New User");
+        setIsOpenUserModal(true);
+        setActionModalUser("CREATE");
+    }
+
+    const handleRefresh = async () => {
+        await fetchUsers();
+        setCurrentPage(1);
     }
 
     return (
         <>
             <div className="manage-user-container container">
                 <div className='user-header'>
-                    <div className='title'>Table Users</div>
+                    <div
+                        style={{
+                            textAlign: "center",
+                            fontSize: "2em",
+                            fontWeight: 600,
+                            fontFamily: "Lexend",
+                            paddingTop: "15px"
+                        }}
+                        className='title'>Table Users</div>
                     <div className='actions'>
-                        <button className='btn btn-success'>Refresh</button>
-                        <button className='btn btn-primary'>Create New User</button>
+                        <button
+                            onClick={() => handleRefresh()}
+                            className='btn btn-success my-3'>Refresh<i className='fa fa-refresh mx-2'></i> </button>
+                        <button
+                            onClick={() => handleCreateUser()}
+                            className='btn btn-primary mx-3 my-3'>Create New User<i className='fa fa-user-plus mx-2'></i></button>
                     </div>
                 </div>
 
@@ -68,10 +103,12 @@ const UsersPage = () => {
                                             <td>{item.username}</td>
                                             <th>{item.Group?.name ?? <span style={{ color: "#878383", fontWeight: "400" }}>Not Authorized</span>}</th>
                                             <td>
-                                                <button className='btn btn-warning '>Edit</button>
+                                                <button
+                                                    onClick={() => handleEditUser(item)}
+                                                    className='btn btn-warning '>Edit<i class="fa fa-pencil mx-2"></i></button>
                                                 <button
                                                     onClick={() => handleDeleteUser(item)}
-                                                    className='btn btn-danger mx-2'>Delete</button>
+                                                    className='btn btn-danger mx-2'>Delete<i class="fa fa-trash mx-2"></i></button>
                                             </td>
                                         </tr>
                                     )
@@ -118,6 +155,15 @@ const UsersPage = () => {
                 dataDelete={dataDelete}
                 fetchUsers={fetchUsers}
                 setCurrentPage={setCurrentPage}
+            />
+
+            <UserModal
+                titleModal={titleModal}
+                show={isOpenUserModal}
+                setShow={setIsOpenUserModal}
+                fetchUsers={fetchUsers}
+                action={actionModalUser}
+                dataEdit={dataEdit}
             />
 
         </>
