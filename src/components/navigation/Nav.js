@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Nav.scss';
 import { NavLink, useLocation } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 const Nav = (props) => {
-    const [isShowHeader, setIsShowHeader] = useState(true);
-    let location = useLocation();
+    const { user } = useContext(UserContext);
+    const location = useLocation();
 
-    useEffect(() => {
-        let session = sessionStorage.getItem('account');
-        if (location.pathname === "/login") {
-            setIsShowHeader(false)
-        }
-    }, []);
-
-    return (
-        <>
-            {isShowHeader === true &&
+    if (user && user.isAuthenticated === true || location.pathname === "/") {
+        return (
+            <>
                 <div className='nav-container'>
                     <div className="topnav">
                         <NavLink to="/" exact>Home</NavLink>
@@ -25,10 +19,13 @@ const Nav = (props) => {
                         <NavLink to="/login">Login</NavLink>
                     </div>
                 </div>
-            }
-        </>
+            </>
+        )
+    } else {
+        return <></>
+    }
 
-    );
+
 }
 
 export default Nav;

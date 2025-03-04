@@ -32,8 +32,13 @@ const updateUserService = (userData) => {
     return axios.put("/api/v1/users/update", { ...userData })
 }
 
+const getUserAccount = () => {
+    return axios.get(`/api/v1/account`)
+}
+
 export {
     registerService, loginService,
     fetchAllUsers, deleteUser, fetchGroup,
-    createUserService, updateUserService
+    createUserService, updateUserService,
+    getUserAccount
 }

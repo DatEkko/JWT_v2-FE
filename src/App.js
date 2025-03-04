@@ -5,29 +5,46 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
 import _ from "lodash";
 import AppRoutes from './routes/AppRoutes';
+import { Triangle } from 'react-loader-spinner';
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
 
 function App() {
-  const [account, setAccount] = useState({});
-  useEffect(() => {
-    let session = sessionStorage.getItem('account');
-    if (session) {
-      setAccount(JSON.parse(session));
-    }
-  }, [])
-
+  const { user } = useContext(UserContext)
   return (
     <>
       <Router>
-        <div className="app-header">
-          <Nav />
-        </div>
+        {user && user.isLoading ?
+          <div style={{
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
+            <Triangle
+              height="100"
+              width="100"
+              color='black'
+              ariaLabel='Loading'
+            />
+            <div style={{ fontFamily: "Lexend", fontWeight: 600 }}>Loading...</div>
+          </div>
 
-        <div className="App-container">
-          <AppRoutes />
-        </div>
+          :
+          <>
+            <div className="app-header">
+              <Nav />
+            </div>
+
+            <div className="App-container">
+              <AppRoutes />
+            </div>
+          </>
+        }
+
       </Router>
 
       <ToastContainer

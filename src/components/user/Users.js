@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Users.scss';
 import { fetchAllUsers } from '../../service/apiService';
 import ReactPaginate from 'react-paginate';
 import ConfirmDeleteUserModal from '../modals/ConfirmDeleteUserModal';
 import UserModal from '../modals/UserModal';
+import { UserContext } from '../../context/UserContext';
 
 
 const UsersPage = () => {
@@ -105,17 +106,17 @@ const UsersPage = () => {
                                             <td>
                                                 <button
                                                     onClick={() => handleEditUser(item)}
-                                                    className='btn btn-warning '>Edit<i class="fa fa-pencil mx-2"></i></button>
+                                                    className='btn btn-warning '>Edit<i className="fa fa-pencil mx-2"></i></button>
                                                 <button
                                                     onClick={() => handleDeleteUser(item)}
-                                                    className='btn btn-danger mx-2'>Delete<i class="fa fa-trash mx-2"></i></button>
+                                                    className='btn btn-danger mx-2'>Delete<i className="fa fa-trash mx-2"></i></button>
                                             </td>
                                         </tr>
                                     )
                                 })
                                 :
                                 <tr>
-                                    <td style={{ textAlign: "center" }} colSpan={"4"}>No Data</td>
+                                    <td style={{ textAlign: "center", padding: "20px", fontFamily: "Lexend" }} colSpan={"6"}>No Data</td>
                                 </tr>
                             }
 
