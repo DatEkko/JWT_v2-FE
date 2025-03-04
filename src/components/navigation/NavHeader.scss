@@ -1,0 +1,44 @@
+.nav-header-container {
+    font-family: "Lexend";
+
+    .bg-header {
+        .container {
+            .navbar-brand {
+                font-family: "Black Ops One", serif;
+                color      : white;
+                font-weight: 400;
+                font-size  : 2em;
+
+                &:hover {
+                    color: rgb(116, 186, 239);
+                }
+            }
+
+            .navbar-collapse {
+                .navbar-nav {
+                    .welcome {
+                        display    : flex;
+                        color      : white;
+                        align-items: center;
+                        user-select: none;
+                    }
+
+                    .nav-link {
+                        margin-left: 40px;
+
+                        &.active {
+                            color: rgb(116, 186, 239);
+                        }
+
+                        color: white;
+
+                        &:hover {
+                            color: rgb(116, 186, 239);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

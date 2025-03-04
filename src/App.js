@@ -1,5 +1,5 @@
 import './App.scss';
-import Nav from './components/navigation/Nav';
+import NavHeader from './components/navigation/NavHeader';
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
@@ -34,9 +34,10 @@ function App() {
           </div>
 
           :
+
           <>
             <div className="app-header">
-              <Nav />
+              <NavHeader />
             </div>
 
             <div className="App-container">

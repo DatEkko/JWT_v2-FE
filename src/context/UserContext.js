@@ -17,10 +17,7 @@ const UserProvider = ({ children }) => {
     }
 
     const doLogoutContext = () => {
-        setUser(user => ({
-            name: '',
-            auth: false
-        }))
+        setUser({ ...defaultUser, isLoading: false })
     }
 
     const fetchUser = async () => {
@@ -48,8 +45,6 @@ const UserProvider = ({ children }) => {
             setUser({ ...defaultUser, isLoading: false })
         }
     }
-
-    console.log(user)
 
     const nonGetAccount = ['/login', '/register']
     useEffect(() => {
